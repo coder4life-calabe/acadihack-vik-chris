@@ -1,17 +1,26 @@
 #imports the game
 import pygame 
 import time
-
+import Toppings
+import random
 
 playerXPos = 0
 playerYPos = 0
 
+pep = Toppings.Topping(random.randint(0,640), random.randint(0,360))
+mush = Toppings.Topping(random.randint(0,640), random.randint(0,360))
+chee = Toppings.Topping(random.randint(0,640), random.randint(0,360))
+# pizza = Toppings(pep, mush, chee)
+toppings_group = pygame.sprite.Group()
+toppings_group.add(pep, mush, chee)
 
 pygame.init()
 screen = pygame.display.set_mode((640, 360))
 clock = pygame.time.Clock()
 running = True
 dt = 0
+
+topping_timer = 0 
 
 # Load background
 screen.fill("green")
@@ -38,10 +47,19 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
+
+
+    topping_timer += dt 
+    if topping_timer > 5000:
+        t = Toppings.Topping(random.randint(0,640), random.randint(0,360))
+        toppings_group.add(t)
+        topping_timer = 0 
     # DRAW STUFF ON SCREEN
     screen.fill("green")
     pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(playerXPos,playerYPos,30, 20))
+
+    toppings_group.draw(screen)
+    toppings_group.update()
     
     print(playerXPos)
 
@@ -52,7 +70,7 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_DOWN]:
       # only move down if ypos<0
-      if playerYPos < 360 :
+      if playerYPos < 340 :
             playerYPos = playerYPos + .1*dt  
         # player_pos.y -= 300 * dt
     if keys[pygame.K_UP]:
@@ -61,7 +79,7 @@ while running:
             playerYPos = playerYPos - .1*dt  
     #     # player_pos.y += 300 * dt
     if keys[pygame.K_RIGHT]:
-      if playerXPos < 340 :
+      if playerXPos < 610 :
             playerXPos = playerXPos + .1*dt  
     #     # player_pos.x -= 300 * dt
     if keys[pygame.K_LEFT]:     
@@ -72,6 +90,7 @@ while running:
         running= False
     
     dt = clock.tick(60)
+
 
 
 pygame.quit()
