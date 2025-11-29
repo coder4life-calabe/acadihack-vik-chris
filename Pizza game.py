@@ -41,22 +41,37 @@ while running:
     
     # DRAW STUFF ON SCREEN
     screen.fill("green")
-    pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(200,playerYPos,30, 20))
+    pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(playerXPos,playerYPos,30, 20))
+    
+    print(playerXPos)
+
+    pygame.Surface.fill(screen, color="brown", rect=pygame.Rect(300, 100 ,30, 20))
+    # DISPLAY ON SCREEN
     pygame.display.flip()
     
     keys = pygame.key.get_pressed()
     if keys[pygame.K_DOWN]:
-       
-       playerYPos = playerYPos + 1
+      # only move down if ypos<0
+      if playerYPos < 360 :
+            playerYPos = playerYPos + .1*dt  
         # player_pos.y -= 300 * dt
-    # if keys[pygame.K_UP]:
+    if keys[pygame.K_UP]:
+        # only move up if ypos>0
+        if playerYPos > 0 :   
+            playerYPos = playerYPos - .1*dt  
     #     # player_pos.y += 300 * dt
-    # if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT]:
+      if playerXPos < 340 :
+            playerXPos = playerXPos + .1*dt  
     #     # player_pos.x -= 300 * dt
-    # if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT]:     
+       if playerXPos > 0 :
+            playerXPos = playerXPos - .1*dt  
     #     # player_pos.x += 300 * dt
     if keys[pygame.K_ESCAPE]:
         running= False
+    
+    dt = clock.tick(60)
 
 
 pygame.quit()
