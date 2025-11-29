@@ -3,6 +3,7 @@ import pygame
 import time
 import Toppings
 import random
+import Player
 
 playerXPos = 0
 playerYPos = 0
@@ -33,14 +34,15 @@ pygame.Surface.fill(screen, color="brown", rect=pygame.Rect(300, 100 ,30, 20))
 pygame.display.flip()
 
 # Wait a bit
-# pygame.event.wait( timeout=10000)
+# pygame.event.wait( timeout=10000)Saew 
 time.sleep(1)
 
 # Load player
 # pygame.sprite.Sprite
+player = Player.Player(0,0)
 
-pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(200, 100 ,30, 20))
-pygame.display.flip()
+# pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(200, 100 ,30, 20))
+# pygame.display.flip()
 
 while running:
     # pygame.QUIT event means the user clicked X to close your window
@@ -56,10 +58,15 @@ while running:
         topping_timer = 0 
     # DRAW STUFF ON SCREEN
     screen.fill("green")
-    pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(playerXPos,playerYPos,30, 20))
+    # pygame.Surface.fill(screen, color="blue", rect=pygame.Rect(playerXPos,playerYPos,30, 20))
+    # player.update()
+    player.rect.topleft = (playerXPos, playerYPos)
+    player.draw(screen)
 
-    toppings_group.draw(screen)
-    toppings_group.update()
+    for topping in toppings_group:
+        topping.draw(screen)
+    # toppings_group.draw(screen)
+    # toppings_group.update()
     
     print(playerXPos)
 
@@ -89,6 +96,18 @@ while running:
     if keys[pygame.K_ESCAPE]:
         running= False
     
+    colliding_toppings = pygame.sprite.spritecollide(player, toppings_group, dokill=False)
+    # print(colliding_toppings)
+    print(player.rect)
+
+    for topping in toppings_group:
+        print(topping)
+        if topping in colliding_toppings:
+            toppings_group.remove(topping)
+            print("Hi, I'm running")
+    
+
+ 
     dt = clock.tick(60)
 
 
