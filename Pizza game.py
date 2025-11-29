@@ -8,9 +8,9 @@ import Player
 playerXPos = 0
 playerYPos = 0
 
-pep = Toppings.Topping(random.randint(0,640), random.randint(0,360))
-mush = Toppings.Topping(random.randint(0,640), random.randint(0,360))
-chee = Toppings.Topping(random.randint(0,640), random.randint(0,360))
+pep = Toppings.Mushroom(random.randint(0,640), random.randint(0,360))
+mush = Toppings.Pepporoni(random.randint(0,640), random.randint(0,360))
+chee = Toppings.Cheese(random.randint(0,640), random.randint(0,360))
 # pizza = Toppings(pep, mush, chee)
 toppings_group = pygame.sprite.Group()
 toppings_group.add(pep, mush, chee)
