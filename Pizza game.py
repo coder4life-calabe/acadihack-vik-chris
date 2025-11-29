@@ -48,11 +48,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-
+    topping_classes = [Toppings.Pepporoni, Toppings.Mushroom, Toppings.Cheese]
     topping_timer += dt 
     if topping_timer > 5000:
-        t = Toppings.Topping(random.randint(0,640), random.randint(0,360))
-        toppings_group.add(t)
+        random_topping = random.choice(topping_classes)(random.randint(0,640), random.randint(0,360))
+        toppings_group.add(random_topping)
         topping_timer = 0 
     # DRAW STUFF ON SCREEN
     screen.fill("green")

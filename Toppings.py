@@ -7,5 +7,25 @@ class Topping(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topright = (x,y)
 
+class Pepporoni(Topping):
+    def __inti__(self, x, y):
+        super().__init__(x, y)
+        self.image.fill ("red")
+        self.type = "pepperoni"
+
+
+class Mushroom(Topping):
+    def __inti__(self, x, y):
+        super().__init__(x, y)
+        self.image.fill ("white")
+        self.type = "mushroom"
+
+class Cheese(Topping):
+    def __inti__(self, x, y):
+        super().__init__(x, y)
+        self.image.fill ("yellow")
+        self.type = ""
+
+
 
     
